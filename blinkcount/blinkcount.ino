@@ -148,18 +148,16 @@ void loop()
             if (millis() >= next_print) {
                 next_print += REPORT_INTERVAL;
                 Serial.println("+"); // start marker
-                for (int i = 0; i < SENSORS; i++) {
-                    Serial.print(i, DEC);
-                    Serial.print(" ");
-                    Serial.println(blinks[i], DEC);
-                    blinks[i] = 0;
-                }
+                  Serial.print(0, DEC);
+                  Serial.print(" ");
+                  Serial.println(blinks[i], DEC);
                 Serial.println("-"); // end marker
                 datastreams[0].setInt(blinks[0]);
                 Serial.println("Uploading it to Xively");
                 int ret = xivelyclient.put(feed, xivelyKey);
                 Serial.print("xivelyclient.put returned ");
                 Serial.println(ret);                
+                  blinks[0] = 0;
             }
         }
     }
